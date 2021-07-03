@@ -56,6 +56,7 @@
                     <button onclick="EconomicClassTotal(false)" class="button-style">-</button>
                     <input id="input-economy-number" class="inp-style inp-width input-text" type="text" value="0" name="">
                     <button onclick="EconomicClassTotal(true)" class="button-style">+</button>
+                    <h5><span id="economy-Class-total-price">00</span></h5>
                 </div>
                 
             </div>
@@ -64,10 +65,11 @@
                 <div>
                     <label for="">First  Class ($150)</label> 
                 </div>
-                <div class="f-class">
+                <div class="f-class ">
                     <button onclick="FirstClassTotal(false)" class="button-style">-</button>
                     <input  id="input-FirstClass-number" class="inp-style inp-width input-text" type="text" name="" value="0">
                     <button onclick="FirstClassTotal(true)" class="button-style">+</button>
+                    <h5 id="First-Class-total-price"><span>00</span></h5>
                 </div>   
             </div>
             <div class="calculations">
@@ -76,7 +78,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$ <span id="sub-total">00</span> </p>
+                        <p>$<span id="sub-total">00</span> </p>
                     </div>
                 </div>
 
@@ -98,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="submission" class="btn-style">Book Now</button>
         </div>
 
         <div class="booking-content">
@@ -111,7 +113,7 @@
        
     <script>
 
-          
+        let totalCost=0;  
     function FirstClassTotal(isIncrease){
         let inputCurrentNumber  = document.getElementById("input-FirstClass-number");
      
@@ -125,16 +127,18 @@
         }
          
           inputCurrentNumber.value=newNumber;
-           let totalCost=newNumber*150;
+            totalCost=newNumber*150;
        
-           document.getElementById("sub-total").innerText=totalCost;
+           document.getElementById("First-Class-total-price").innerText=totalCost;
+           let totalCalculation = calculate();
+              
         }
        
-     
+     let totalEconomyCost=0;
      function EconomicClassTotal(isIncrease){
     const economyNumber =  document.getElementById("input-economy-number");
     const convertEconomyNumber=parseInt(economyNumber.value);
-   let newEconomyNumber=convertEconomyNumber;
+      let newEconomyNumber=convertEconomyNumber;
      if(isIncrease==true){
         newEconomyNumber=convertEconomyNumber+1;
       }
@@ -142,53 +146,24 @@
          newEconomyNumber=convertEconomyNumber-1;
      }
      economyNumber.value=newEconomyNumber;
-     const totalEconomyCost=newEconomyNumber*100;
-     document.getElementById("sub-total").innerText=totalEconomyCost;
-                  
-      }
-  
+      totalEconomyCost=newEconomyNumber*100;
+     document.getElementById("economy-Class-total-price").innerText=totalEconomyCost;
+    let totalCalculation = calculate();
+   
+    
+    }        
 
-
-
-
-
-//  function calculateTotalAmount(type){
-//     //ai function ta kivabe ticketTotalNUmber function a pathale kaj korbe??
-//     let subTotal=input-FirstClass-input*150+input-economy-input*100;
-//    let totalPrice=document.getElementById("subtotal").innerText=subTotal;
-//    const tax=Math.round(totalPrice *0.1);
-//    document.getElementById("tax-amount").innerText=tax;
-//    const grandTotal=tax+totalPrice;
-//    document.getElementById("grand-total").innerText=grandTotal;
-//  }
-
-//   function ticketTotalNumber(isIncrease,type){
-//     const inputNumber =  document.getElementById("input-"+type+"-number");
-//         const convertInputNumber=parseInt(inputNumber.value);
-//         let newInputNumber=convertInputNumber;
-//         if(isIncrease==true){
-//             newInputNumber=convertInputNumber+1;
-//         }
-//         if(isIncrease==false){
-//             newInputNumber=convertInputNumber-1;
-//         }
-      
-//         inputNumber.value=newInputNumber;
-//         let totalTicketCost=0;
-//         if(type=="FirstClass"){
-//             totalTicketCost=newInputNumber*150;
-//             }
-//         if(type=="economy"){
-//             totalTicketCost=newInputNumber*100;
-//         }
-//         let total=totalTicketCost+totalTicketCost;
-//      document.getElementById("sub-total").innerText=total;
-      
-//   }
-
-  
-  
- 
+  function calculate(){
+     
+   let totalExpense =  document.getElementById("sub-total").innerText=totalCost+totalEconomyCost;
+   let taxAmount=totalExpense *0.1;
+   document.getElementById("tax-amount").innerText=taxAmount;
+   document.getElementById("grand-total").innerText=taxAmount+totalExpense; 
+  }
+     document.getElementById("submission").addEventListener("click",function(){
+         
+         alert("you have confirmed the booking");
+     })
     </script>
 </body>
 

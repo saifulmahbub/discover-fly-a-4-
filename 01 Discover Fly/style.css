@@ -130,3 +130,11 @@ nav ul li a:hover, a.active{
 .input-text{
     text-align: center;
 }
+#First-Class-total-price{
+    margin: 5px;
+    padding-left: 5px;
+}
+#economy-Class-total-price{
+    margin: 5px;
+    padding-left: 5px;
+}
